@@ -5,16 +5,18 @@ const userRouter = express.Router();
 //creating an array of type User
 let usersArray:User[] = [];
 
-usersArray.push(new User("merv123","merv","val","merv@email.com"))
+usersArray.push(new User("1","merv","val","merv@email.com"))
 
 
-//Get requests
+//Get request
 userRouter.get('/',(req,res,next)=>{
     res.status(200).send(usersArray);
 });
 
-userRouter.post('/', (req,res,next)=>{
-
+//Post Request
+userRouter.post('/',(req,res,next)=>{
+    usersArray.push(new User(req.body.userId,req.body.firstName,req.body.lastName,req.body.emailAddress));
+    res.status(201).send(usersArray[usersArray.length - 1]);
 });
 
 //This router is exported and used in userApp

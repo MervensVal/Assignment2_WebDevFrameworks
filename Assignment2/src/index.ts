@@ -1,9 +1,17 @@
+import bodyParser = require("body-parser");
 import express from "express";
 import {userRouter} from './routes/usersRoutes';
 
 let application = express();
+//body-parser is a middleware that parses a request
+// It is responsible for parsing (make info easier to work with/break down) the incoming request 
+//bodies in a middleware before you handle it
+application.use(bodyParser.urlencoded({extended: false}));
+application.use(bodyParser.json());
 
-//This makes shure that any response that starts with User gets sent to userRouter
+
+
+//This makes sure that any response that starts with User gets sent to userRouter
 application.use('/users', userRouter);
 
 //res.status(404) in the method can be used to generate 404 error
