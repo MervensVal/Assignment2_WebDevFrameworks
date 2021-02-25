@@ -1,6 +1,7 @@
 import bodyParser = require("body-parser");
 import express from "express";
 import {userRouter} from './routes/usersRoutes';
+import path from 'path';
 
 let application = express();
 //body-parser is a middleware that parses a request
@@ -16,9 +17,9 @@ application.use('/users', userRouter);
 
 //res.status(404) in the method can be used to generate 404 error
 application.use('/',(req,res,next)=>{
-    res.send("Main page with tables");
+    res.send("<h1>Main page with tables<h1>");
 })
 
 application.listen(3000);
 
-//32 mins
+//1hr mins

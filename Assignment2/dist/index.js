@@ -16,8 +16,8 @@ application.use(bodyParser.json());
 application.use('/users', usersRoutes_1.userRouter);
 //res.status(404) in the method can be used to generate 404 error
 application.use('/', (req, res, next) => {
-    res.send("Main page with tables");
+    res.send("<h1>Main page with tables<h1>");
 });
 application.listen(3000);
-//32 mins
+//1hr mins
 //# sourceMappingURL=index.js.map
