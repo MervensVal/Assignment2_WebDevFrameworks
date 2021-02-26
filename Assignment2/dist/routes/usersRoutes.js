@@ -11,6 +11,7 @@ exports.userRouter = userRouter;
 //creating an array of type User
 let usersArray = [];
 exports.usersArray = usersArray;
+//initial uer
 usersArray.push(new user_1.User(1, "initialFName", "initialLName", "initial@email.com"));
 //Get request
 userRouter.get('/', (req, res, next) => {
@@ -40,6 +41,25 @@ userRouter.patch('/:userId', (req, res, next) => {
     }
     else {
         res.send(foundUser);
+    }
+});
+//delete request
+userRouter.delete('/:userId', (req, res, next) => {
+    let userId = +req.params.id;
+    let selectedIndex = -1;
+    for (let i = 0; i < usersArray.length; i++) {
+        if (usersArray[i].userId === userId) {
+            selectedIndex = i;
+            break;
+        }
+    }
+    if (selectedIndex >= 0) {
+        //Removes elements from an array in the position specified
+        exports.usersArray = usersArray = usersArray.splice(selectedIndex, 1);
+        res.status(204).send('No Content');
+    }
+    else {
+        res.status(204).send('No item found');
     }
 });
 //# sourceMappingURL=usersRoutes.js.map

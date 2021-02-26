@@ -5,6 +5,7 @@ const userRouter = express.Router();
 //creating an array of type User
 let usersArray:User[] = [];
 
+//initial uer
 usersArray.push(new User(1,"initialFName","initialLName","initial@email.com"))
 
 
@@ -41,10 +42,28 @@ userRouter.patch('/:userId',(req,res,next)=>{
     else {
         res.send(foundUser);
     }
-
 });
 
-//Send status of 204 content not found for delete request
+//delete request
+userRouter.delete('/:userId',(req,res,next)=>{
+    let userId = +req.params.id;
+    let selectedIndex = -1;
+    for(let i=0; i < usersArray.length; i++){
+        if(usersArray[i].userId === userId){
+            selectedIndex = i;
+            break;
+        }
+    }
+    if(selectedIndex >= 0){
+        //Removes elements from an array in the position specified
+        usersArray = usersArray.splice(selectedIndex,1);
+        res.status(204).send('No Content')
+    }
+    else{
+        res.status(204).send('No item found')
+    }
+
+});
 
 
 
